@@ -185,7 +185,7 @@ ErrorCode matrix_getHeight(CPMatrix matrix, uint32_t* result) {
 		}
 
 		
-		CHECK_MATRIX_CALL(matrix_create(result, rhs->height, lhs->width));
+		CHECK_MATRIX_CALL(matrix_create(result, lhs->height, rhs->width));
 		
 
 		
