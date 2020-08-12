@@ -60,4 +60,4 @@ build
 
 #testing
 src/main.c
-src/main2.c
+main2.c
