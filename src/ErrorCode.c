@@ -37,6 +37,9 @@ const char* error_getErrorMessage(ErrorCode code) {
 	if (code == ERROR_NOT_IMPLEMENTED) {
 		return "ERROR_NOT_IMPLEMENTED";
 	}
+	if (code == ERROR_CANT_CREATE_MATRIX) {
+		return "ERROR_CANT_CREATE_MATRIX";
+	}
 	return "unknown eror";
 
 }
