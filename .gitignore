@@ -56,7 +56,7 @@ dkms.conf
 .vscode
 .idea
 tester
-build
+src/build
 
 #testing
 main.c
