@@ -3,8 +3,8 @@ project(matrix VERSION 0.1.0)
 
 set(C_STANDARD C99)
 add_compile_options(-Wall -Wextra -pedantic -Werror)
-add_executable(dd ErrorCode.c Matrix.c main2.c)
-#add_library(matrix SHARED ErrorCode.c Matrix.c)
+
+add_library(matrix SHARED ErrorCode.c Matrix.c)
 
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
