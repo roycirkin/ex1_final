@@ -35,7 +35,7 @@ if (!error_isSuccess(res)) {                                 \
 
 ErrorCode matrix_create(PMatrix* matrix, uint32_t height, uint32_t width) {
     
-	if (matrix == NULL || (*matrix)->height == NULL || (*matrix)->width) {
+	if (matrix == NULL || (*matrix)->height == 0 || (*matrix)->width == 0) {
 	return ERROR_CANT_CREATE_MATRIX;
 	}
 
