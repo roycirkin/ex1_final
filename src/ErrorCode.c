@@ -3,8 +3,6 @@
 
 #include "ErrorCode.h"
 
-#define MESSAGE_SIZE 50
-#define _CRT_SECURE_NO_WARNINGS
 
 bool error_isSuccess(ErrorCode code) {
 	if (code == ERROR_SUCCESS) {
@@ -43,6 +41,6 @@ const char* error_getErrorMessage(ErrorCode code) {
 	if(code == ERROR_POINTER_IS_NULL) {
 		return "the pointer you sent is null";
 	}
-	return "unknown eror";
+	return "unknown error";
 
 }

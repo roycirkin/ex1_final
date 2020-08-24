@@ -196,14 +196,16 @@ ErrorCode matrix_getHeight(CPMatrix matrix, uint32_t* result) {
 		
 
 		
-		double val1 = 0, val2 = 0, sum = 0;
+		double valLeft = 0;
+		double valRight = 0;
+		double sum = 0;
 
 		for (size_t i = 0; i < rhs->height; i++) {
 			for (size_t j = 0; j < lhs->width; j++) {
 				for (size_t k = 0; k < lhs->width; k++) {
-					matrix_getValue(lhs, i, k, &val1);
-					matrix_getValue(rhs, k, j, &val2);
-					sum += val1 * val2;
+					matrix_getValue(lhs, i, k, &valLeft);
+					matrix_getValue(rhs, k, j, &valRight);
+					sum += valLeft * valRight;
 				}
 				matrix_setValue(*result, i, j, sum);
 				sum = 0;
