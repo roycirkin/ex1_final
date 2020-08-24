@@ -35,7 +35,7 @@ if (!error_isSuccess(res)) {                                 \
 
 ErrorCode matrix_create(PMatrix* matrix, uint32_t height, uint32_t width) {
     
-	if (*matrix != NULL) {
+	if (matrix == NULL || (*matrix)->height == 0 || (*matrix)->width == 0) {
 	return ERROR_CANT_CREATE_MATRIX;
 	}
 
@@ -59,7 +59,9 @@ ErrorCode matrix_create(PMatrix* matrix, uint32_t height, uint32_t width) {
 
 ErrorCode matrix_copy(PMatrix* result, CPMatrix source) {
 
-	matrix_destroy(*result);
+	if (result == NULL) {
+		return ERROR_CANT_CREATE_MATRIX;
+	}
 	*result = NULL;
 
 	CHECK_MATRIX_MEMORY(source);
@@ -123,7 +125,9 @@ ErrorCode matrix_getHeight(CPMatrix matrix, uint32_t* result) {
 
 	ErrorCode matrix_getValue(CPMatrix matrix, uint32_t rowIndex, uint32_t colIndex,
 		double* value) {
-		
+		if (value == NULL) {
+			return ERROR_POINTER_IS_NULL;
+		}
 		CHECK_MATRIX_MEMORY(matrix);
 		
 
@@ -138,7 +142,9 @@ ErrorCode matrix_getHeight(CPMatrix matrix, uint32_t* result) {
 
 	ErrorCode matrix_add(PMatrix* result, CPMatrix lhs, CPMatrix rhs) {
 		
- 		matrix_destroy(*result);
+		if (result == NULL) {
+			return ERROR_CANT_CREATE_MATRIX;
+		}
 		*result = NULL;
 
 		CHECK_MATRIX_MEMORY(lhs);
@@ -172,8 +178,9 @@ ErrorCode matrix_getHeight(CPMatrix matrix, uint32_t* result) {
 
 
 	ErrorCode matrix_multiplyMatrices(PMatrix* result, CPMatrix lhs, CPMatrix rhs) {
-
-		matrix_destroy(*result);
+		if (result == NULL) {
+		return ERROR_CANT_CREATE_MATRIX;
+		}	
 		*result = NULL;
 		
 		CHECK_MATRIX_MEMORY(lhs);
@@ -189,14 +196,16 @@ ErrorCode matrix_getHeight(CPMatrix matrix, uint32_t* result) {
 		
 
 		
-		double val1 = 0, val2 = 0, sum = 0;
+		double valLeft = 0;
+		double valRight = 0;
+		double sum = 0;
 
 		for (size_t i = 0; i < rhs->height; i++) {
 			for (size_t j = 0; j < lhs->width; j++) {
 				for (size_t k = 0; k < lhs->width; k++) {
-					matrix_getValue(lhs, i, k, &val1);
-					matrix_getValue(rhs, k, j, &val2);
-					sum += val1 * val2;
+					matrix_getValue(lhs, i, k, &valLeft);
+					matrix_getValue(rhs, k, j, &valRight);
+					sum += valLeft * valRight;
 				}
 				matrix_setValue(*result, i, j, sum);
 				sum = 0;
@@ -229,7 +238,6 @@ ErrorCode matrix_getHeight(CPMatrix matrix, uint32_t* result) {
 		return ERROR_SUCCESS;
 				
 	}
-
 
 
 

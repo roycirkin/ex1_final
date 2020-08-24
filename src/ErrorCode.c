@@ -3,8 +3,6 @@
 
 #include "ErrorCode.h"
 
-#define MESSAGE_SIZE 50
-#define _CRT_SECURE_NO_WARNINGS
 
 bool error_isSuccess(ErrorCode code) {
 	if (code == ERROR_SUCCESS) {
@@ -35,11 +33,14 @@ const char* error_getErrorMessage(ErrorCode code) {
 		return "the matrixs you gave are impossible to calculate";
 	}
 	if (code == ERROR_NOT_IMPLEMENTED) {
-		return "ERROR_NOT_IMPLEMENTED";
+		return "the function isnt implemented";
 	}
 	if (code == ERROR_CANT_CREATE_MATRIX) {
-		return "ERROR_CANT_CREATE_MATRIX";
+		return "cant create a matrix";
 	}
-	return "unknown eror";
+	if(code == ERROR_POINTER_IS_NULL) {
+		return "the pointer you sent is null";
+	}
+	return "unknown error";
 
 }
