@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-aaaaaaa
+
 #include "ErrorCode.h"
 #include "Matrix.h"
 
@@ -35,7 +35,7 @@ if (!error_isSuccess(res)) {                                 \
 
 ErrorCode matrix_create(PMatrix* matrix, uint32_t height, uint32_t width) {
     
-	if (*matrix != NULL) {
+	if (matrix == NULL || (*matrix)->height == NULL || (*matrix)->width) {
 	return ERROR_CANT_CREATE_MATRIX;
 	}
 
@@ -59,7 +59,9 @@ ErrorCode matrix_create(PMatrix* matrix, uint32_t height, uint32_t width) {
 
 ErrorCode matrix_copy(PMatrix* result, CPMatrix source) {
 
-	matrix_destroy(*result);
+	if (result == NULL) {
+		return ERROR_CANT_CREATE_MATRIX;
+	}
 	*result = NULL;
 
 	CHECK_MATRIX_MEMORY(source);
@@ -123,7 +125,9 @@ ErrorCode matrix_getHeight(CPMatrix matrix, uint32_t* result) {
 
 	ErrorCode matrix_getValue(CPMatrix matrix, uint32_t rowIndex, uint32_t colIndex,
 		double* value) {
-		
+		if (value == NULL) {
+			return ERROR_POINTER_IS_NULL;
+		}
 		CHECK_MATRIX_MEMORY(matrix);
 		
 
@@ -138,7 +142,9 @@ ErrorCode matrix_getHeight(CPMatrix matrix, uint32_t* result) {
 
 	ErrorCode matrix_add(PMatrix* result, CPMatrix lhs, CPMatrix rhs) {
 		
- 		matrix_destroy(*result);
+		if (result == NULL) {
+			return ERROR_CANT_CREATE_MATRIX;
+		}
 		*result = NULL;
 
 		CHECK_MATRIX_MEMORY(lhs);
@@ -172,8 +178,9 @@ ErrorCode matrix_getHeight(CPMatrix matrix, uint32_t* result) {
 
 
 	ErrorCode matrix_multiplyMatrices(PMatrix* result, CPMatrix lhs, CPMatrix rhs) {
-
-		matrix_destroy(*result);
+		if (result == NULL) {
+		return ERROR_CANT_CREATE_MATRIX;
+		}	
 		*result = NULL;
 		
 		CHECK_MATRIX_MEMORY(lhs);
